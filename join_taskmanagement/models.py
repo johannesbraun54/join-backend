@@ -11,8 +11,8 @@ class Task(models.Model):
     status = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    assignedTo = models.ManyToManyField(Contact, related_name="tasks")
-    dueDate = models.DateField() # lesen
+    assigned_to = models.ManyToManyField(Contact, related_name="tasks")
+    due_date = models.DateField() # lesen
     prio = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
     
