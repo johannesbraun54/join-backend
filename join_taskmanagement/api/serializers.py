@@ -29,10 +29,10 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ['id', 'status', 'title', 'description',
                   'assigned_to', 'assigned_to_ids', 'due_date', 'prio', 'category', 'subtasks']
-
+        
     assigned_to = ContactSerializer(many=True, read_only=True)
     assigned_to_ids = serializers.PrimaryKeyRelatedField(
-        queryset=Contact.objects.all(), many=True, write_only=True, source="assigned_to")
+        queryset=Contact.objects.all(), many=True, write_only=True, source="assigned_to", required=False)
     subtasks = SubtaskSerializer(many=True, read_only=True)
 
 

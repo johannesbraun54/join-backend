@@ -16,10 +16,12 @@ def tasks_view(request):
 
     if request.method == 'POST':
         serializer = TaskSerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         else:
+            print(serializer.errors)
             return Response(serializer.errors)
 
 
