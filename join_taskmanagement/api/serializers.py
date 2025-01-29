@@ -9,6 +9,7 @@ class ContactSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class SubtaskSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -19,20 +20,17 @@ class SubtaskSerializer(serializers.ModelSerializer):
     task_id = serializers.PrimaryKeyRelatedField(
         queryset=Task.objects.all(), write_only=True, source="task")
 
-    def create(self, validated_data):
-        return super().create(validated_data)
-
 
 class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
         fields = ['id', 'status', 'title', 'description',
-                  'assigned_to', 'assigned_to_ids', 'due_date', 'prio', 'category', 'subtasks']
+                  'assignedTo', 'assigned_to_ids', 'dueDate', 'prio', 'category', 'subtasks']
         
-    assigned_to = ContactSerializer(many=True, read_only=True)
+    assignedTo = ContactSerializer(many=True, read_only=True)
     assigned_to_ids = serializers.PrimaryKeyRelatedField(
-        queryset=Contact.objects.all(), many=True, write_only=True, source="assigned_to", required=False)
+        queryset=Contact.objects.all(), many=True, write_only=True, source="assignedTo", required=False)
     subtasks = SubtaskSerializer(many=True, read_only=True)
 
 
@@ -41,8 +39,8 @@ class TaskGETSerializer(serializers.Serializer):
     status = serializers.CharField(max_length=255)
     title = serializers.CharField(max_length=255)
     description = serializers.CharField(max_length=255)
-    assigned_to = ContactSerializer(many=True, read_only=True)
-    due_date = serializers.DateField()  # lesen
+    assignedTo = ContactSerializer(many=True, read_only=True)
+    dueDate = serializers.DateField()  # lesen
     prio = serializers.CharField(max_length=255)
     category = serializers.CharField(max_length=255)
     subtasks = SubtaskSerializer(many=True, read_only=True)
@@ -52,7 +50,7 @@ class TaskGETSerializer(serializers.Serializer):
 #     status = serializers.CharField(max_length=255)
 #     title = serializers.CharField(max_length=255)
 #     description = serializers.CharField(max_length=255)
-#     assigned_to = ContactSerializer(many=True, read_only=True) # ändern
+#     assignedTo = ContactSerializer(many=True, read_only=True) # ändern
 #     due_date = serializers.DateField() # lesen
 #     prio = serializers.CharField(max_length=255)
 #     category = serializers.CharField(max_length=255)

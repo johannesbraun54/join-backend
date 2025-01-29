@@ -7,6 +7,12 @@ from join_taskmanagement.models import Task, Contact, Subtask
 ############# TASK VIEWS #############
 
 
+def get_task_ID(task):
+    serializer = TaskGETSerializer(task)
+    print(serializer.data, "data with id")
+    return Response(serializer.data)
+
+
 @api_view(['GET', 'POST'])
 def tasks_view(request):
     if request.method == 'GET':
@@ -16,9 +22,10 @@ def tasks_view(request):
 
     if request.method == 'POST':
         serializer = TaskSerializer(data=request.data)
-        print(request.data)
         if serializer.is_valid():
-            serializer.save()
+            task = serializer.save()
+            print("task.pk", task.pk)
+            get_task_ID(task)
             return Response(serializer.data)
         else:
             print(serializer.errors)
@@ -48,28 +55,30 @@ def task_detail_view(request, pk):
 
 ############# CONTACT VIEWS #############
 
+
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
-    
+
 ############# SUBTASK VIEWS #############
+
 
 class SubtasksViewSet(viewsets.ModelViewSet):
     queryset = Subtask.objects.all()
     serializer_class = SubtaskSerializer
-
     
-# @api_view(['GET', 'POST'])
-# def subtasks_view(request):
-#     if request.method == 'GET':
-#         subtasks = Subtask.objects.all()
-#         serializer = SubtaskSerializer(subtasks, many=True)
-#         return Response(serializer.data)
 
-#     if request.method == 'POST':
-#         serializer = SubtaskSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         else:
-#             return Response(serializer.errors)
+@api_view(['GET', 'POST'])
+def subtasks_view(request):
+    if request.method == 'GET':
+        subtasks = Subtask.objects.all()
+        serializer = SubtaskSerializer(subtasks, many=True)
+        return Response(serializer.data)
+
+    if request.method == 'POST':
+        serializer = SubtaskSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)

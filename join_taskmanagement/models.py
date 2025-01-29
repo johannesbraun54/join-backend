@@ -3,7 +3,7 @@ import datetime
 # Create your models here.
 
 class Contact(models.Model):
-    full_name = models.CharField(max_length=255)
+    fullName = models.CharField(max_length=255)
     email = models.EmailField() # lesen
     phone = models.IntegerField() 
 
@@ -11,8 +11,8 @@ class Task(models.Model):
     status = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    assigned_to = models.ManyToManyField(Contact, related_name="tasks", blank=True)
-    due_date = models.DateField(datetime.datetime.today, null=True) 
+    assignedTo = models.ManyToManyField(Contact, related_name="tasks", blank=True)
+    dueDate = models.DateField(datetime.datetime.today) 
     prio = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
     
