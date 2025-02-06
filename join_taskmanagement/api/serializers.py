@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from join_taskmanagement.models import Task, Contact, Subtask
+from join_taskmanagement.models import Task, Contact, Subtask, Summary
 
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -44,6 +44,13 @@ class TaskGETSerializer(serializers.Serializer):
     prio = serializers.CharField(max_length=255)
     category = serializers.CharField(max_length=255)
     subtasks = SubtaskSerializer(many=True, read_only=True)
+    
+class SummarySerializer(serializers.ModelSerializer):
+    
+        class Meta:
+            model = Summary
+            exclude = []
+        
 
 # class TaskCREATESerializer(serializers.Serializer):
 #     id = serializers.IntegerField()

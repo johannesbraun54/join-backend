@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins, generics
-from .serializers import TaskSerializer, ContactSerializer, SubtaskSerializer, TaskGETSerializer
-from join_taskmanagement.models import Task, Contact, Subtask
+from .serializers import TaskSerializer, ContactSerializer, SubtaskSerializer, TaskGETSerializer, SummarySerializer
+from join_taskmanagement.models import Task, Contact, Subtask, Summary
 
 ############# TASK VIEWS #############
 
@@ -66,19 +66,34 @@ class ContactViewSet(viewsets.ModelViewSet):
 class SubtasksViewSet(viewsets.ModelViewSet):
     queryset = Subtask.objects.all()
     serializer_class = SubtaskSerializer
-    
 
-@api_view(['GET', 'POST'])
-def subtasks_view(request):
+
+@api_view(['GET'])
+def summary_view(request):
     if request.method == 'GET':
-        subtasks = Subtask.objects.all()
-        serializer = SubtaskSerializer(subtasks, many=True)
+        get_earliest_date = Task.objects.all().order_by("dueDate").first()
+        summary = Summary.objects.create(tasks_in_board=len(Task.objects.all()),
+                                               todo=len(Task.objects.filter(status="todo")),
+                                               in_progress=len(Task.objects.filter(status="inProgress")),
+                                               await_feedback=len(Task.objects.filter(status="awaitFeedback")),
+                                               done=len(Task.objects.filter(status="done")),
+                                               prio_urgent=len(Task.objects.filter(prio="Urgent")),
+                                               earliest_due_date = get_earliest_date.dueDate)
+        serializer = SummarySerializer(summary)
         return Response(serializer.data)
 
-    if request.method == 'POST':
-        serializer = SubtaskSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(serializer.errors)
+
+# @api_view(['GET', 'POST'])
+# def subtasks_view(request):
+#     if request.method == 'GET':
+#         subtasks = Subtask.objects.all()
+#         serializer = SubtaskSerializer(subtasks, many=True)
+#         return Response(serializer.data)
+
+#     if request.method == 'POST':
+#         serializer = SubtaskSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         else:
+#             return Response(serializer.errors)
