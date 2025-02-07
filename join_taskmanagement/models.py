@@ -5,7 +5,7 @@ import datetime
 class Contact(models.Model):
     fullName = models.CharField(max_length=255)
     email = models.EmailField() # lesen
-    phone = models.BigIntegerField() 
+    phone = models.CharField(max_length=25) 
 
 class Task(models.Model):
     status = models.CharField(max_length=255)
