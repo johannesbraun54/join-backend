@@ -20,5 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('join_taskmanagement.api.urls')),
-    path('api/auth', include('join_auth.api.urls'))
+    path('api/auth/', include('join_auth.api.urls'))
 ]
