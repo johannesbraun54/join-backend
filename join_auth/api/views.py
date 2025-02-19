@@ -19,7 +19,8 @@ class CustomLoginView(ObtainAuthToken):
             data = {
                 'token': token.key,
                 'username': user.username,
-                'email': user.email
+                'email': user.email,
+                'login_successful': True
             }
         else:
             data = serializer.errors
