@@ -48,3 +48,4 @@ class RegistrationView(APIView):
             data = serializer.errors
 
         return Response(data)
+

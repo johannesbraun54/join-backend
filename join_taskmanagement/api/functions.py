@@ -1,4 +1,4 @@
-from join_taskmanagement.models import Task, Contact, Subtask, Summary
+from join_taskmanagement.models import Task
 import datetime
 
 def check_earliest_date():

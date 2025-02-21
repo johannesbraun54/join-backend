@@ -21,12 +21,3 @@ class Subtask(models.Model):
     name = models.CharField(max_length=255)
     done = models.BooleanField(False)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="subtasks")
-
-class Summary(models.Model):
-    tasks_in_board = models.IntegerField()
-    todo = models.IntegerField()
-    in_progress = models.IntegerField()
-    await_feedback = models.IntegerField()
-    done = models.IntegerField()
-    prio_urgent = models.IntegerField()
-    earliest_due_date = models.DateField()
