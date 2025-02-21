@@ -1,29 +1,41 @@
+Join Backend is the Django-based backend for a task management app,
+that helps organizations manage their tasks efficiently.
+
 Functions
-Kanban board: Visualize tasks in different status columns.
-User management: Register and manage user accounts.
-Task assignment: Assign tasks to specific users.
-Due dates: Set deadlines for tasks.
+User authentication: Management of user accounts and authentication.
+Task management: Creation, editing and deletion of tasks.
+API interfaces: Provision of RESTful APIs for interaction with the front end.
 
 clonse respository
-git clone https://github.com/johannesbraun54/join_frontend.git
+git clone https://github.com/johannesbraun54/join-backend.git
 
-install dependencies
-npm install
+python3 -m venv venv
+source venv/bin/activate  # Auf Windows: venv\Scripts\activate
+
+install dependenies
+pip install -r requirements.txt
+
+migrate database
+python manage.py migrate
+
+create superuser
+python manage.py createsuperuser
 
 start server
-npm start
+python manage.py runserver
 
-Directory structure
-join_frontend/
-├── css/                # Statische CSS-Dateien
-├── fonts/              # Schriftarten
-├── img/                # Bilder und Grafiken
-├── js/                 # JavaScript-Dateien
-├── templates/          # HTML-Vorlagen
-├── index.html          # Startseite
-├── signUp.html         # Registrierungsseite
-├── application.html    # Hauptanwendung
-├── up.sh               # Startskript für Unix-Systeme
-└── up.bat              # Startskript für Windows-Systeme
+app is now reachable with http://127.0.0.1:8000/
 
+API endpoints
+Authentication:
 
+POST /api/auth/login/: User login
+POST /api/auth/logout/: User logout
+POST /api/auth/register/: User registration
+Tasks:
+
+GET /api/tasks/: Retrieve list of all tasks
+POST /api/tasks/: Create new task
+GET /api/tasks/{id}/: Retrieve details of a specific task
+PUT /api/tasks/{id}/: Update existing task
+DELETE /api/tasks/{id}/: Delete task
