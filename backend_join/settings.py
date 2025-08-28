@@ -65,6 +65,11 @@ MIDDLEWARE = [
 
 ]
 
+ALLOWED_HOSTS = [
+        'join-backend.jb-webdevelopment.com',
+
+        '34.1.166.178'
+]
 
 CSRF_TRUSTED_ORIGINS = [
 
