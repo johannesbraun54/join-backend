@@ -1,83 +1,59 @@
-Join Backend is the Django-based backend for a task management app,
-that helps organizations manage their tasks efficiently.
+**Join Backend** is the Django-based backend for a task management app, that helps organizations manage their tasks efficiently. Specifically for my App **Join-Taskmanagement**.
+For more Informations see my respository: https://github.com/johannesbraun54/Join-Taskmanagement
 
-Functions
+## Functionality
 User authentication: Management of user accounts and authentication.
 Task management: Creation, editing and deletion of tasks.
 API interfaces: Provision of RESTful APIs for interaction with the front end.
 
-clonse respository
+## Installation & Setup
+
+### clone respository
+```bash
 git clone https://github.com/johannesbraun54/join-backend.git
+cd join-backend
+```
 
-python3 -m venv venv
-source venv/bin/activate  # Auf Windows: venv\Scripts\activate
+### create and activate venv
+```bash
+python3 -m venv env
+# Mac and Linux:
+source env/bin/activate  
+# Windows: 
+env\Scripts\activate
+```
 
-install dependenies
+### install dependencies
+```bash
 pip install -r requirements.txt
+```
 
-migrate database
+### migrate database
+```bash
 python manage.py migrate
+```
 
-create superuser
+### create superuser
+```bash
 python manage.py createsuperuser
+```
 
-start server
+### start server
+```bash
 python manage.py runserver
+# app is now reachable with http://127.0.0.1:8000/
+```
 
-app is now reachable with http://127.0.0.1:8000/
+## API endpoints
 
-API endpoints
-Authentication:
+### Authentication 
+* **POST** `/api/auth/login/` → User Login 
+* **POST** `/api/auth/logout/` → User Logout
+* **POST** `/api/auth/register/` → User Registration 
 
-POST /api/auth/login/: User login
-POST /api/auth/logout/: User logout
-POST /api/auth/register/: User registration
-Tasks:
-
-GET /api/tasks/: Retrieve list of all tasks
-POST /api/tasks/: Create new task
-GET /api/tasks/{id}/: Retrieve details of a specific task
-PUT /api/tasks/{id}/: Update existing task
-DELETE /api/tasks/{id}/: Delete task
-
-Join Backend is the Django-based backend for a task management app,
-that helps organizations manage their tasks efficiently.
-
-Functions
-User authentication: Management of user accounts and authentication.
-Task management: Creation, editing and deletion of tasks.
-API interfaces: Provision of RESTful APIs for interaction with the front end.
-
-clonse respository
-git clone https://github.com/johannesbraun54/join-backend.git
-
-python3 -m venv venv
-source venv/bin/activate  # Auf Windows: venv\Scripts\activate
-
-install dependenies
-pip install -r requirements.txt
-
-migrate database
-python manage.py migrate
-
-create superuser
-python manage.py createsuperuser
-
-start server
-python manage.py runserver
-
-app is now reachable with http://127.0.0.1:8000/
-
-API endpoints
-Authentication:
-
-POST /api/auth/login/: User login
-POST /api/auth/logout/: User logout
-POST /api/auth/register/: User registration
-Tasks:
-
-GET /api/tasks/: Retrieve list of all tasks
-POST /api/tasks/: Create new task
-GET /api/tasks/{id}/: Retrieve details of a specific task
-PUT /api/tasks/{id}/: Update existing task
-DELETE /api/tasks/{id}/: Delete task
+### Tasks
+* **GET** `/api/tasks/` → get list of all tasks
+* **POST** `/api/tasks/` → create new task
+* **GET** `/api/tasks/{id}/` → retrieve details of a specific task
+* **PUT** `/api/tasks/{id}/` → update tasks
+* **DELETE** `/api/tasks/{id}/` → delete tasks
