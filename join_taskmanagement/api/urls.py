@@ -9,7 +9,5 @@ router.register(r'tasks', TasksViewset)
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('tasks/', tasks_view),
-    # path('tasks/<int:pk>', task_detail_view, name='task-detail'),
     path('summary/', summary_view)
 ]

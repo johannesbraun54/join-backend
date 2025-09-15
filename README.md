@@ -1,5 +1,5 @@
-**Join Backend** is the Django-based backend for a task management app, that helps organizations manage their tasks efficiently. Specifically for my App **Join-Taskmanagement**.
-For more Informations see my respository: https://github.com/johannesbraun54/Join-Taskmanagement
+**Join Backend** is the Django-based backend for a task management app, that helps organizations manage their tasks efficiently. 
+It is specially designed for my app [**Join Task Management**](https://github.com/johannesbraun54/join_frontend).
 
 ## Functionality
 User authentication: Management of user accounts and authentication.
